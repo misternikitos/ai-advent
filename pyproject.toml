@@ -1,0 +1,333 @@
+[project]
+name = "ai-advent"
+version = "0.1.0"
+description = "Solutions for the AI Advent."
+requires-python = ">=3.12"
+dependencies = ['openai>=2.21.0,<3.0.0', 'pydantic-settings>=2.13.0,<3.0.0']
+
+[dependency-groups]
+dev = [
+    "mypy>=1.17.1,<2.0.0",
+    "pre-commit>=4.3.0,<5.0.0",
+    "pylint>=4.0.2,<5.0.0",
+    "ruff>=0.12.8,<1.0.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+[project.urls]
+"Source" = "https://github.com/misternikitos/ai-advent"
+
+[project.scripts]
+start = "ai_advent.__main__:main"
+
+[tool.ruff.lint]
+select = [
+    "FAST",  # fastapi
+    "YTT",   # flake8-2020 
+    "ANN",   # flake8-annotations 
+    "ASYNC", # flake8-async 
+    "S",     # flake8-bandit 
+    "BLE",   # flake8-blind-except 
+    "FBT",   # flake8-boolean-trap 
+    "B",     # flake8-bugbear 
+    "A",     # flake8-builtins 
+    "COM",   # flake8-commas 
+    "C4",    # flake8-comprehensions 
+    "CPY",   # flake8-copyright 
+    "DTZ",   # flake8-datetimez 
+    "T10",   # flake8-debugger 
+    "DJ",    # flake8-django 
+    "EM",    # flake8-errmsg 
+    "EXE",   # flake8-executable 
+    "FIX",   # flake8-fixme 
+    "FA",    # flake8-future-annotations 
+    "INT",   # flake8-gettext 
+    "ISC",   # flake8-implicit-str-concat 
+    "ICN",   # flake8-import-conventions 
+    "LOG",   # flake8-logging 
+    "G",     # flake8-logging-format 
+    "INP",   # flake8-no-pep420 
+    "PIE",   # flake8-pie 
+    "T20",   # flake8-print 
+    "PYI",   # flake8-pyi 
+    "PT",    # flake8-pytest-style 
+    "Q",     # flake8-quotes 
+    "RSE",   # flake8-raise 
+    "RET",   # flake8-return 
+    "SLF",   # flake8-self 
+    "SIM",   # flake8-simplify 
+    "SLOT",  # flake8-slots 
+    "TID",   # flake8-tidy-imports 
+    "TD",    # flake8-todos 
+    "TC",    # flake8-type-checking 
+    "ARG",   # flake8-unused-arguments 
+    "PTH",   # flake8-use-pathlib 
+    "FLY",   # flynt 
+    "I",     # isort 
+    "C90",   # mccabe
+    "NPY",   # NumPy-specific rules
+    "PD",    # pandas-vet
+    "N",     # pep8-naming
+    "PERF",  # perflint
+    "E",     # pycodestyle
+    "W",     # pycodestyle
+    "DOC",   # pydoclint
+    "D",     # pydocstyle
+    "F",     # pyflakes
+    "PGH",   # pygrep-hooks
+    "PL",    # pylint
+    "UP",    # pyupgrade
+    "FURB",  # refurb
+    "RUF",   # ruff
+    "TRY",   # tryceratops
+]
+ignore = [
+    "ANN401", # Dynamically typed expressions (typing.Any) are disallowed in `__call__`
+    "ANN003", # Missing type annotation for `**_kwargs`
+    "EM102",  # Exception must not use an f-string literal, assign to variable first
+    "EM101",  # Exception must not use a string literal, assign to variable first
+    "TRY003", # Avoid specifying long messages outside the exception class
+    "D203",   # 1 blank line required before class docstring
+    "D213",   # Multi-line docstring summary should start at the second line
+    "T201",   # `print` found
+    "RUF001", # String contains ambiguous
+    # temporary
+    "D100", # Missing docstring in public module
+    "D101", # Missing docstring in public class
+    "D102", # Missing docstring in public method
+    "D103", # Missing docstring in public function
+    "D104", # Missing docstring in public package
+
+]
+
+[tool.pylint.messages_control]
+disable = [
+    "format",                        # handled by ruff
+    "duplicate-code",                # unavoidable
+    "too-many-ancestors",            # too strict
+    "too-many-arguments",            # are not enforced for the sake of readability
+    "too-many-positional-arguments", # are not enforced for the sake of readability
+    "too-few-public-methods",        # are not enforced for the sake of readability
+    "too-many-locals",               # are not enforced for the sake of readability
+
+    # Handled by ruff
+    # Ref: <https://github.com/astral-sh/ruff/issues/970>
+    "await-outside-async",                  # PLE1142
+    "bad-str-strip-call",                   # PLE1310
+    "bad-string-format-type",               # PLE1307
+    "bidirectional-unicode",                # PLE2502
+    "continue-in-finally",                  # PLE0116
+    "duplicate-bases",                      # PLE0241
+    "misplaced-bare-raise",                 # PLE0704
+    "format-needs-mapping",                 # F502
+    "function-redefined",                   # F811
+    "invalid-all-format",                   # PLE0605
+    "invalid-all-object",                   # PLE0604
+    "invalid-character-backspace",          # PLE2510
+    "invalid-character-esc",                # PLE2513
+    "invalid-character-nul",                # PLE2514
+    "invalid-character-sub",                # PLE2512
+    "invalid-character-zero-width-space",   # PLE2515
+    "logging-too-few-args",                 # PLE1206
+    "logging-too-many-args",                # PLE1205
+    "missing-format-string-key",            # F524
+    "mixed-format-string",                  # F506
+    "no-method-argument",                   # N805
+    "no-self-argument",                     # N805
+    "nonexistent-operator",                 # B002
+    "nonlocal-without-binding",             # PLE0117
+    "not-in-loop",                          # F701, F702
+    "notimplemented-raised",                # F901
+    "return-in-init",                       # PLE0101
+    "return-outside-function",              # F706
+    "syntax-error",                         # E999
+    "too-few-format-args",                  # F524
+    "too-many-format-args",                 # F522
+    "too-many-star-expressions",            # F622
+    "truncated-format-string",              # F501
+    "undefined-all-variable",               # F822
+    "undefined-variable",                   # F821
+    "used-prior-global-declaration",        # PLE0118
+    "yield-inside-async-function",          # PLE1700
+    "yield-outside-function",               # F704
+    "anomalous-backslash-in-string",        # W605
+    "assert-on-string-literal",             # PLW0129
+    "assert-on-tuple",                      # F631
+    "bad-format-string",                    # W1302, F
+    "bad-format-string-key",                # W1300, F
+    "bare-except",                          # E722
+    "binary-op-exception",                  # PLW0711
+    "cell-var-from-loop",                   # B023
+    "dangerous-default-value",              # B006
+    "duplicate-except",                     # B014
+    "duplicate-key",                        # F601
+    "duplicate-string-formatting-argument", # F
+    "duplicate-value",                      # F
+    "eval-used",                            # S307
+    "exec-used",                            # S102
+    "expression-not-assigned",              # B018
+    "f-string-without-interpolation",       # F541
+    "forgotten-debug-statement",            # T100
+    "format-string-without-interpolation",  # F
+    "global-statement",                     # PLW0603
+    "global-variable-not-assigned",         # PLW0602
+    "implicit-str-concat",                  # ISC001
+    "import-self",                          # PLW0406
+    "inconsistent-quotes",                  # Q000
+    "invalid-envvar-default",               # PLW1508
+    "keyword-arg-before-vararg",            # B026
+    "logging-format-interpolation",         # G
+    "logging-fstring-interpolation",        # G
+    "logging-not-lazy",                     # G
+    "misplaced-future",                     # F404
+    "named-expr-without-context",           # PLW0131
+    "nested-min-max",                       # PLW3301
+    "pointless-statement",                  # B018
+    "raise-missing-from",                   # B904
+    "redefined-builtin",                    # A001
+    "try-except-raise",                     # TRY302
+    "unused-argument",                      # ARG001
+    "unused-format-string-argument",        # F507
+    "unused-format-string-key",             # F504
+    "unused-import",                        # F401
+    "unused-variable",                      # F841
+    "useless-else-on-loop",                 # PLW0120
+    "wildcard-import",                      # F403
+    "bad-classmethod-argument",             # N804
+    "consider-iterating-dictionary",        # SIM118
+    "empty-docstring",                      # D419
+    "invalid-name",                         # N815
+    "line-too-long",                        # E501
+    "missing-class-docstring",              # D101
+    "missing-final-newline",                # W292
+    "missing-function-docstring",           # D103
+    "missing-module-docstring",             # D100
+    "multiple-imports",                     # E401
+    "singleton-comparison",                 # E711, E712
+    "subprocess-run-check",                 # PLW1510
+    "superfluous-parens",                   # UP034
+    "ungrouped-imports",                    # I001
+    "unidiomatic-typecheck",                # E721
+    "unnecessary-direct-lambda-call",       # PLC3002
+    "unnecessary-lambda-assignment",        # PLC3001
+    "unnecessary-pass",                     # PIE790
+    "unneeded-not",                         # SIM208
+    "useless-import-alias",                 # PLC0414
+    "wrong-import-order",                   # I001
+    "wrong-import-position",                # E402
+    "comparison-of-constants",              # PLR0133
+    "comparison-with-itself",               # PLR0124
+    "consider-merging-isinstance",          # PLR1701
+    "consider-using-dict-comprehension",    # C402
+    "consider-using-generator",             # C417
+    "consider-using-get",                   # SIM401
+    "consider-using-set-comprehension",     # C401
+    "consider-using-sys-exit",              # PLR1722
+    "consider-using-ternary",               # SIM108
+    "literal-comparison",                   # F632
+    "property-with-parameters",             # PLR0206
+    "super-with-arguments",                 # UP008
+    "too-many-branches",                    # PLR0912
+    "too-many-return-statements",           # PLR0911
+    "too-many-statements",                  # PLR0915
+    "trailing-comma-tuple",                 # COM818
+    "unnecessary-comprehension",            # C416
+    "use-a-generator",                      # C417
+    "use-dict-literal",                     # C406
+    "use-list-literal",                     # C405
+    "useless-object-inheritance",           # UP004
+    "useless-return",                       # PLR1711
+    "no-else-break",                        # RET508
+    "no-else-continue",                     # RET507
+    "no-else-raise",                        # RET506
+    "no-else-return",                       # RET505
+    "broad-except",                         # BLE001
+    "protected-access",                     # SLF001
+    "broad-exception-raised",               # TRY002
+    "consider-using-f-string",              # PLC0209
+
+    # Handled by mypy
+    # Ref: <https://github.com/antonagestam/pylint-mypy-overlap>
+    "abstract-class-instantiated",
+    "arguments-differ",
+    "assigning-non-slot",
+    "assignment-from-no-return",
+    "assignment-from-none",
+    "bad-exception-cause",
+    "bad-format-character",
+    "bad-reversed-sequence",
+    "bad-super-call",
+    "bad-thread-instantiation",
+    "catching-non-exception",
+    "comparison-with-callable",
+    "deprecated-class",
+    "dict-iter-missing-items",
+    "format-combined-specification",
+    "global-variable-undefined",
+    "import-error",
+    "inconsistent-mro",
+    "inherit-non-class",
+    "init-is-generator",
+    "invalid-class-object",
+    "invalid-enum-extension",
+    "invalid-envvar-value",
+    "invalid-format-returned",
+    "invalid-hash-returned",
+    "invalid-metaclass",
+    "invalid-overridden-method",
+    "invalid-repr-returned",
+    "invalid-sequence-index",
+    "invalid-slice-index",
+    "invalid-slots-object",
+    "invalid-slots",
+    "invalid-star-assignment-target",
+    "invalid-str-returned",
+    "invalid-unary-operand-type",
+    "invalid-unicode-codec",
+    "isinstance-second-argument-not-valid-type",
+    "method-hidden",
+    "misplaced-format-function",
+    "missing-format-argument-key",
+    "missing-format-attribute",
+    "missing-kwoa",
+    "no-member",
+    "no-value-for-parameter",
+    "non-iterator-returned",
+    "non-str-assignment-to-dunder-name",
+    "nonlocal-and-global",
+    "not-a-mapping",
+    "not-an-iterable",
+    "not-async-context-manager",
+    "not-callable",
+    "not-context-manager",
+    "overridden-final-method",
+    "raising-bad-type",
+    "raising-non-exception",
+    "redundant-keyword-arg",
+    "relative-beyond-top-level",
+    "self-cls-assignment",
+    "signature-differs",
+    "star-needs-assignment-target",
+    "subclassed-final-class",
+    "super-without-brackets",
+    "too-many-function-args",
+    "typevar-double-variance",
+    "typevar-name-mismatch",
+    "unbalanced-dict-unpacking",
+    "unbalanced-tuple-unpacking",
+    "unexpected-keyword-arg",
+    "unhashable-member",
+    "unpacking-non-sequence",
+    "unsubscriptable-object",
+    "unsupported-assignment-operation",
+    "unsupported-binary-operation",
+    "unsupported-delete-operation",
+    "unsupported-membership-test",
+    "used-before-assignment",
+    "using-final-decorator-in-unsupported-version",
+    "wrong-exception-operation",
+]
