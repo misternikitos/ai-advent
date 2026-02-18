@@ -7,7 +7,7 @@ repos:
         args:
           - --fix
       - id: ruff-format
-        files: ^((app)/.+)?[^/]+\.(py|pyi)$
+        files: ^((ai_advent)/.+)?[^/]+\.(py|pyi)$
   - repo: https://github.com/codespell-project/codespell
     rev: v2.4.1
     hooks:
@@ -46,7 +46,7 @@ repos:
           - --py311-plus
           - --force
           - --keep-updates
-        files: ^(app|tests|scripts)/.+\.py$
+        files: ^(ai_advent|tests|scripts)/.+\.py$
   - repo: https://github.com/astral-sh/uv-pre-commit
     rev: 0.9.25
     hooks:
@@ -61,11 +61,11 @@ repos:
         language: system
         require_serial: true
         types_or: [python, pyi]
-        files: ^(app)/.+\.(py|pyi)$
+        files: ^(ai_advent)/.+\.(py|pyi)$
       - id: pylint
         name: pylint
         entry: uv run pylint
         language: system
         require_serial: true
         types_or: [python, pyi]
-        files: ^(app)/.+\.(py|pyi)$
+        files: ^(ai_advent)/.+\.(py|pyi)$
