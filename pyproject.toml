@@ -95,6 +95,7 @@ ignore = [
     "D213",   # Multi-line docstring summary should start at the second line
     "T201",   # `print` found
     "RUF001", # String contains ambiguous
+    "RUF003", # String contains ambiguous
     # temporary
     "D100", # Missing docstring in public module
     "D101", # Missing docstring in public class
